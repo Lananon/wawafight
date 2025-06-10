@@ -12,7 +12,12 @@ config_version=5
 
 config/name="wawafight"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://misc/sprite_exports/icon.svg"
+
+[display]
+
+window/size/viewport_width=320
+window/size/viewport_height=180
 
 [rendering]
 
