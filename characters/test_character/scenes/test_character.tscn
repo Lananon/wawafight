@@ -1,3 +1,15 @@
-[gd_scene format=3 uid="uid://bu37v8ap6qsjr"]
+[gd_scene load_steps=3 format=3 uid="uid://bu37v8ap6qsjr"]
+
+[ext_resource type="Script" uid="uid://b1n3xd38lht1a" path="res://classes/character_root_class.gd" id="1_e8dxd"]
+[ext_resource type="Texture2D" uid="uid://bbuuruuhk4hfl" path="res://characters/test_character/sprites/hirav6.png" id="1_sfhei"]
 
 [node name="TestCharacter" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_e8dxd")
+walk_speed = 5
+gravity = 2
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_sfhei")
+offset = Vector2(2, -32)
+hframes = 126
