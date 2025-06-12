@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bu37v8ap6qsjr"]
+[gd_scene load_steps=5 format=3 uid="uid://bu37v8ap6qsjr"]
 
 [ext_resource type="Script" uid="uid://b1n3xd38lht1a" path="res://classes/character_root_class.gd" id="1_e8dxd"]
 [ext_resource type="Texture2D" uid="uid://bbuuruuhk4hfl" path="res://characters/test_character/sprites/hirav6.png" id="1_sfhei"]
+[ext_resource type="Script" uid="uid://b6vnbf37sfkqa" path="res://scripts/animation_player.gd" id="3_kg2ky"]
+[ext_resource type="Script" uid="uid://dahf0r6sbb5xh" path="res://classes/animation_step.gd" id="4_0ig77"]
 
 [node name="TestCharacter" type="Node2D"]
 texture_filter = 1
@@ -11,7 +13,16 @@ jump_speed = 6
 jump_height = 20
 gravity = 1
 
-[node name="sprite" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_sfhei")
 offset = Vector2(2, -32)
 hframes = 126
+
+[node name="animation_player" type="Node2D" parent="."]
+script = ExtResource("3_kg2ky")
+
+[node name="idle" type="Node2D" parent="animation_player"]
+
+[node name="1" type="Node2D" parent="animation_player/idle"]
+script = ExtResource("4_0ig77")
+metadata/_custom_type_script = "uid://dahf0r6sbb5xh"

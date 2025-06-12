@@ -18,7 +18,8 @@ down = "p1_down"
 position = Vector2(36, 75)
 
 [node name="player2" type="Node2D" parent="."]
+position = Vector2(320, -1)
 script = ExtResource("2_33cqm")
 
 [node name="TestCharacter2" parent="player2" instance=ExtResource("3_xwcet")]
-position = Vector2(271, 143)
+position = Vector2(-63, 107)

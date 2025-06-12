@@ -1,5 +1,8 @@
 extends Node2D
 
+##object references
+@onready var animation_player = get_node("animation_player")
+
 ##movement variables
 #all of these are in quarter pixels per frame
 @export var walk_speed: int
