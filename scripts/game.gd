@@ -8,8 +8,8 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	player1_character.upscaled_position = player1_character.global_position * 4
-	player2_character.upscaled_position = player2_character.global_position * 4
+	player1_character.upscaled_position = player1_character.global_position * player1_character.upscaling_factor
+	player2_character.upscaled_position = player2_character.global_position * player2_character.upscaling_factor
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

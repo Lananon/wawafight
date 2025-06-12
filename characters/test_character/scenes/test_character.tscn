@@ -7,7 +7,9 @@
 texture_filter = 1
 script = ExtResource("1_e8dxd")
 walk_speed = 5
-gravity = 2
+jump_speed = 6
+jump_height = 20
+gravity = 1
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_sfhei")
