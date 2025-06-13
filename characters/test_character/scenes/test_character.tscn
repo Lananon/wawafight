@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bu37v8ap6qsjr"]
+[gd_scene load_steps=8 format=3 uid="uid://bu37v8ap6qsjr"]
 
 [ext_resource type="Script" uid="uid://csx7flbdigf8" path="res://characters/test_character/scripts/test_character.gd" id="1_0ig77"]
 [ext_resource type="Texture2D" uid="uid://bbuuruuhk4hfl" path="res://characters/test_character/sprites/hirav6.png" id="1_sfhei"]
@@ -7,6 +7,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrd36"]
 size = Vector2(12, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dmrmj"]
+size = Vector2(12, 28)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ig77"]
 size = Vector2(10, 8)
@@ -23,7 +26,7 @@ gravity = 1
 texture = ExtResource("1_sfhei")
 offset = Vector2(2, -32)
 hframes = 126
-frame = 25
+frame = 97
 
 [node name="animation_player" type="Node2D" parent="."]
 script = ExtResource("3_kg2ky")
@@ -43,7 +46,23 @@ metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
 position = Vector2(-1, -17)
 shape = SubResource("RectangleShape2D_mrd36")
 
+[node name="crouch" type="Node2D" parent="animation_player"]
+
+[node name="1" type="Node2D" parent="animation_player/crouch"]
+script = ExtResource("4_0ig77")
+animation_frame = 97
+metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
+
+[node name="hitbox" type="Area2D" parent="animation_player/crouch/1"]
+
+[node name="hurtbox" type="Area2D" parent="animation_player/crouch/1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/crouch/1/hurtbox"]
+position = Vector2(-1, -14)
+shape = SubResource("RectangleShape2D_dmrmj")
+
 [node name="5A" type="Node2D" parent="animation_player"]
+visible = false
 
 [node name="1" type="Node2D" parent="animation_player/5A"]
 visible = false

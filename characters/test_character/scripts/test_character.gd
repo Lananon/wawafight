@@ -15,3 +15,12 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func set_anims():
+	if state == "neutral":
+		if get_input_vector().y == 1:
+			animation_player.play("crouch")
+		else:
+			animation_player.play("idle")
+	if state == "attack":
+		animation_player.play(current_move)

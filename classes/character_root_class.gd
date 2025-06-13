@@ -78,6 +78,20 @@ func buffer(button: String, direction: Vector2i) -> void:
 	direction_buffer = direction
 	buffer_timer = buffer_window
 
+func get_block_type():
+	if get_input_vector().x * side == -1:
+		if is_on_ground():
+			if get_input_vector().y == 1:
+				return "LOW"
+			else:
+				return "HIGH"
+		else:
+			return "AIR"
+	else:
+		return "nothing"
+
+
+
 
 
 
@@ -94,7 +108,6 @@ func execute_inputs():
 		if state == "neutral" or cancel_options.has(closest_valid_input):
 			current_move = move_dictionary[closest_valid_input]
 			set_state("attack", duration_dictionary[move_dictionary[closest_valid_input]])
-	
 
 func process_inputs() -> void:
 	buffer_timer -= 1
@@ -125,8 +138,9 @@ func calculate_physics() -> void:
 
 func movement() -> void:
 	if is_on_ground() and state == "neutral":
-		if get_input_vector().x != 0:
-			velocity.x = get_input_vector().x * walk_speed
+		if get_input_vector().y != 1:
+			if get_input_vector().x != 0:
+				velocity.x = get_input_vector().x * walk_speed
 		
 		#jumping
 		if get_input_vector().y == -1:
@@ -160,4 +174,4 @@ func end_of_frame() -> void:
 	if state_reset_timer <= 0:
 		state = "neutral"
 		
-	#print()
+	print(get_block_type())

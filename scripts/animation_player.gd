@@ -9,10 +9,7 @@ var current_frame: int
 
 func animate():
 	
-	if get_parent().state == "neutral":
-		play("idle")
-	if get_parent().state == "attack":
-		play(get_parent().current_move)
+
 	
 	for child in get_node(str(current_animation)).get_children():
 		if child.frame == current_frame:

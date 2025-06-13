@@ -29,5 +29,7 @@ func frame_tick() -> void:
 	player2_character.calculate_physics()
 	player1_character.end_of_frame()
 	player2_character.end_of_frame()
+	player1_character.set_anims()
+	player2_character.set_anims()
 	player1_character.animation_player.animate()
 	player2_character.animation_player.animate()
