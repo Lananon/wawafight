@@ -6,6 +6,7 @@ var current_animation: String = "idle"
 var current_frame: int
 
 @onready var current_step = get_node("idle/1")
+@onready var previous_step = get_node("idle/1")
 
 func animate():
 	
@@ -17,7 +18,12 @@ func animate():
 			current_step = child
 			if child.name == "LOOP":
 				current_frame = 0
-	
+			if previous_step != current_step:
+				if current_step.is_new_attack:
+					get_parent().is_hitbox_active = true
+			
+			
+			previous_step = current_step
 	current_frame += 1
 	
 

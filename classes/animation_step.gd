@@ -6,3 +6,5 @@ class_name animation_step
 
 @export var frame: int
 @export var animation_frame: int
+@export var hitstun: int
+@export var is_new_attack: bool

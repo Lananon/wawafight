@@ -24,3 +24,5 @@ func set_anims():
 			animation_player.play("idle")
 	if state == "attack":
 		animation_player.play(current_move)
+	if state == "hitstun":
+		animation_player.play("hitstun")

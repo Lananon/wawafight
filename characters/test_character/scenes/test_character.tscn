@@ -26,7 +26,7 @@ gravity = 1
 texture = ExtResource("1_sfhei")
 offset = Vector2(2, -32)
 hframes = 126
-frame = 97
+frame = 21
 
 [node name="animation_player" type="Node2D" parent="."]
 script = ExtResource("3_kg2ky")
@@ -83,6 +83,8 @@ visible = false
 script = ExtResource("4_0ig77")
 frame = 5
 animation_frame = 24
+hitstun = 20
+is_new_attack = true
 metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
 
 [node name="hitbox" type="Area2D" parent="animation_player/5A/2"]
@@ -109,5 +111,21 @@ metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
 [node name="hurtbox" type="Area2D" parent="animation_player/5A/3"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/5A/3/hurtbox"]
+position = Vector2(-1, -17)
+shape = SubResource("RectangleShape2D_mrd36")
+
+[node name="hitstun" type="Node2D" parent="animation_player"]
+visible = false
+
+[node name="1" type="Node2D" parent="animation_player/hitstun"]
+script = ExtResource("4_0ig77")
+animation_frame = 21
+metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
+
+[node name="hitbox" type="Area2D" parent="animation_player/hitstun/1"]
+
+[node name="hurtbox" type="Area2D" parent="animation_player/hitstun/1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/hitstun/1/hurtbox"]
 position = Vector2(-1, -17)
 shape = SubResource("RectangleShape2D_mrd36")

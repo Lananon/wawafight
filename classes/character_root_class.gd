@@ -27,6 +27,7 @@ var state: String = "neutral"
 var state_reset_timer: int = 0
 var current_move: String
 var cancel_options: Array = []
+var is_hitbox_active: bool = false
 ##input variables
 const buffer_window: int = 8
 var button_buffer: String
@@ -34,6 +35,7 @@ var direction_buffer: Vector2i
 var buffer_timer: int
 var move_dictionary = {}
 var duration_dictionary = {}
+
 
 ##methods for things idkk
 func get_input_vector() -> Vector2i:
@@ -70,8 +72,11 @@ func get_hurtbox():
 func get_hitbox():
 	return animation_player.current_step.get_node("hitbox")
 
-func on_hit() -> void:
-	print("woof!")
+func on_hit(attack) -> void:
+	if get_opponent().is_hitbox_active:
+		print("woof!")
+		set_state("hitstun", attack.hitstun)
+		get_opponent().is_hitbox_active = false
 
 func buffer(button: String, direction: Vector2i) -> void:
 	button_buffer = button
@@ -120,7 +125,7 @@ func process_inputs() -> void:
 
 func check_for_hit() -> void:
 	if get_hurtbox().get_overlapping_areas().has(get_opponent().get_hitbox()):
-		on_hit()
+		on_hit(get_opponent().animation_player.current_step)
 
 func calculate_physics() -> void:
 	velocity.y += gravity
@@ -174,4 +179,4 @@ func end_of_frame() -> void:
 	if state_reset_timer <= 0:
 		state = "neutral"
 		
-	print(get_block_type())
+	#print()
