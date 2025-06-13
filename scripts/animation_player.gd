@@ -3,20 +3,28 @@ extends Node2D
 @onready var sprite = get_parent().get_node("Sprite2D")
 
 var current_animation: String = "idle"
-var current_step: int
 var current_frame: int
 
-var current_step_node
+@onready var current_step = get_node("idle/1")
 
 func animate():
 	
+	if get_parent().state == "neutral":
+		play("idle")
+	if get_parent().state == "attack":
+		play(get_parent().current_move)
 	
 	for child in get_node(str(current_animation)).get_children():
 		if child.frame == current_frame:
 			sprite.frame = child.animation_frame
-			current_step_node = child
+			current_step = child
 			if child.name == "LOOP":
 				current_frame = 0
 	
 	current_frame += 1
 	
+
+func play(animation: String):
+	if animation != current_animation:
+		current_animation = animation
+		current_frame = 0

@@ -17,6 +17,12 @@ func _process(delta: float) -> void:
 	frame_tick()
 
 func frame_tick() -> void:
+	player1_character.process_inputs()
+	player2_character.process_inputs()
+	player1_character.execute_inputs()
+	player2_character.execute_inputs()
+	player1_character.check_for_hit()
+	player2_character.check_for_hit()
 	player1_character.movement()
 	player2_character.movement()
 	player1_character.calculate_physics()

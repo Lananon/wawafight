@@ -1,15 +1,16 @@
-extends Node2D
+extends character_root
 
-@export var left: String
-@export var right: String
-@export var up: String
-@export var down: String
-@export var a: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	move_dictionary = {
+		[Vector2i(0, 0), "A"]: "5A",
+		[Vector2i(0, 1), "A"]: "5A"
+	}
+	
+	duration_dictionary = {
+		"5A": 16
+	}
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

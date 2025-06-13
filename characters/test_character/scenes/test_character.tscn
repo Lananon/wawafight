@@ -1,13 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://bu37v8ap6qsjr"]
+[gd_scene load_steps=7 format=3 uid="uid://bu37v8ap6qsjr"]
 
-[ext_resource type="Script" uid="uid://b1n3xd38lht1a" path="res://classes/character_root_class.gd" id="1_e8dxd"]
+[ext_resource type="Script" uid="uid://csx7flbdigf8" path="res://characters/test_character/scripts/test_character.gd" id="1_0ig77"]
 [ext_resource type="Texture2D" uid="uid://bbuuruuhk4hfl" path="res://characters/test_character/sprites/hirav6.png" id="1_sfhei"]
 [ext_resource type="Script" uid="uid://b6vnbf37sfkqa" path="res://scripts/animation_player.gd" id="3_kg2ky"]
 [ext_resource type="Script" uid="uid://dahf0r6sbb5xh" path="res://classes/animation_step.gd" id="4_0ig77"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrd36"]
+size = Vector2(12, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ig77"]
+size = Vector2(10, 8)
+
 [node name="TestCharacter" type="Node2D"]
 texture_filter = 1
-script = ExtResource("1_e8dxd")
+script = ExtResource("1_0ig77")
 walk_speed = 5
 jump_speed = 6
 jump_height = 20
@@ -17,12 +23,72 @@ gravity = 1
 texture = ExtResource("1_sfhei")
 offset = Vector2(2, -32)
 hframes = 126
+frame = 25
 
 [node name="animation_player" type="Node2D" parent="."]
 script = ExtResource("3_kg2ky")
 
 [node name="idle" type="Node2D" parent="animation_player"]
+visible = false
 
 [node name="1" type="Node2D" parent="animation_player/idle"]
 script = ExtResource("4_0ig77")
 metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
+
+[node name="hitbox" type="Area2D" parent="animation_player/idle/1"]
+
+[node name="hurtbox" type="Area2D" parent="animation_player/idle/1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/idle/1/hurtbox"]
+position = Vector2(-1, -17)
+shape = SubResource("RectangleShape2D_mrd36")
+
+[node name="5A" type="Node2D" parent="animation_player"]
+
+[node name="1" type="Node2D" parent="animation_player/5A"]
+visible = false
+script = ExtResource("4_0ig77")
+animation_frame = 23
+metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
+
+[node name="hitbox" type="Area2D" parent="animation_player/5A/1"]
+
+[node name="hurtbox" type="Area2D" parent="animation_player/5A/1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/5A/1/hurtbox"]
+position = Vector2(-1, -17)
+shape = SubResource("RectangleShape2D_mrd36")
+
+[node name="2" type="Node2D" parent="animation_player/5A"]
+visible = false
+script = ExtResource("4_0ig77")
+frame = 5
+animation_frame = 24
+metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
+
+[node name="hitbox" type="Area2D" parent="animation_player/5A/2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/5A/2/hitbox"]
+position = Vector2(10, -23)
+shape = SubResource("RectangleShape2D_0ig77")
+debug_color = Color(0.988735, 0, 0.298613, 0.42)
+
+[node name="hurtbox" type="Area2D" parent="animation_player/5A/2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/5A/2/hurtbox"]
+position = Vector2(-1, -17)
+shape = SubResource("RectangleShape2D_mrd36")
+
+[node name="3" type="Node2D" parent="animation_player/5A"]
+script = ExtResource("4_0ig77")
+frame = 10
+animation_frame = 25
+metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
+
+[node name="hitbox" type="Area2D" parent="animation_player/5A/3"]
+
+[node name="hurtbox" type="Area2D" parent="animation_player/5A/3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/5A/3/hurtbox"]
+position = Vector2(-1, -17)
+shape = SubResource("RectangleShape2D_mrd36")
