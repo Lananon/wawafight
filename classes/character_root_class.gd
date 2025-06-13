@@ -74,8 +74,16 @@ func get_hitbox():
 
 func on_hit(attack) -> void:
 	if get_opponent().is_hitbox_active:
-		print("woof!")
-		set_state("hitstun", attack.hitstun)
+		if attack.block_type.has(get_block_type()):
+			if get_block_type() == "LOW":
+				set_state("crouch_blockstun", attack.blockstun)
+			if get_block_type() == "HIGH":
+				set_state("stand_blockstun", attack.blockstun)
+			if get_block_type() == "AIR":
+				set_state("stand_blockstun", attack.blockstun)
+		else:
+			print("woof!")
+			set_state("hitstun", attack.hitstun)
 		get_opponent().is_hitbox_active = false
 
 func buffer(button: String, direction: Vector2i) -> void:

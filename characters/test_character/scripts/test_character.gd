@@ -18,11 +18,19 @@ func _process(delta: float) -> void:
 
 func set_anims():
 	if state == "neutral":
-		if get_input_vector().y == 1:
-			animation_player.play("crouch")
-		else:
+		if is_on_ground():
+			if get_input_vector().y == 1:
+				animation_player.play("crouch")
+			else:
+				animation_player.play("idle")
+		else: 
 			animation_player.play("idle")
+			
 	if state == "attack":
 		animation_player.play(current_move)
 	if state == "hitstun":
 		animation_player.play("hitstun")
+	if state == "crouch_blockstun":
+		animation_player.play("crouch_blockstun")
+	if state == "stand_blockstun":
+		animation_player.play("stand_blockstun")
