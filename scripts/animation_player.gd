@@ -10,7 +10,6 @@ var current_frame: int
 
 func animate():
 	
-
 	
 	for child in get_node(str(current_animation)).get_children():
 		if child.frame == current_frame:
@@ -24,8 +23,8 @@ func animate():
 			
 			
 			previous_step = current_step
-	current_frame += 1
 	
+	current_frame += 1
 
 func play(animation: String):
 	if animation != current_animation:

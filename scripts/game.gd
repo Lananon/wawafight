@@ -6,6 +6,7 @@ extends Node
 @onready var player1_character = get_node("player1").get_child(0)
 @onready var player2_character = get_node("player2").get_child(0)
 
+var fbf_mode = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player1_character.upscaled_position = player1_character.global_position * player1_character.upscaling_factor
@@ -14,11 +15,22 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	frame_tick()
-
-func frame_tick() -> void:
+	if not fbf_mode:
+		frame_tick()
+	
 	player1_character.process_inputs()
 	player2_character.process_inputs()
+	
+	if Input.is_action_just_pressed("toggle_fbf"):
+		if fbf_mode:
+			fbf_mode = false
+		if fbf_mode == false:
+			fbf_mode = true
+	
+	if Input.is_action_just_pressed("frame_step"):
+		frame_tick()
+
+func frame_tick() -> void:
 	player1_character.execute_inputs()
 	player2_character.execute_inputs()
 	player1_character.check_for_hit()
@@ -27,9 +39,17 @@ func frame_tick() -> void:
 	player2_character.movement()
 	player1_character.calculate_physics()
 	player2_character.calculate_physics()
-	player1_character.end_of_frame()
-	player2_character.end_of_frame()
-	player1_character.set_anims()
-	player2_character.set_anims()
-	player1_character.animation_player.animate()
-	player2_character.animation_player.animate()
+	if player1_character.freeze_timer <= 0:
+		player1_character.end_of_frame()
+	if player2_character.freeze_timer <= 0:
+		player2_character.end_of_frame()
+	if player1_character.freeze_timer <= 0:
+		player1_character.set_anims()
+	if player2_character.freeze_timer <= 0:
+		player2_character.set_anims()
+	if player1_character.freeze_timer <= 0:
+		player1_character.animation_player.animate()
+	if player2_character.freeze_timer <= 0:
+		player2_character.animation_player.animate()
+	player1_character.freeze_update()
+	player2_character.freeze_update()

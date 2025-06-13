@@ -12,3 +12,7 @@ class_name animation_step
 @export var hitstun: int
 @export var blockstun: int
 @export var block_type: Array = ["HIGH", "LOW", "AIR"]
+@export var knockback: Vector2i
+@export var pushback: int
+@export var hitstop: int
+@export var self_hitstop: int

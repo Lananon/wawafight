@@ -87,6 +87,9 @@ animation_frame = 24
 is_new_attack = true
 hitstun = 16
 blockstun = 16
+knockback = Vector2i(5, 0)
+hitstop = 10
+self_hitstop = 10
 metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
 
 [node name="hitbox" type="Area2D" parent="animation_player/5A/2"]

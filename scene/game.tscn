@@ -28,4 +28,4 @@ down = "p2_down"
 a = "p2_a"
 
 [node name="TestCharacter2" parent="player2" instance=ExtResource("3_xwcet")]
-position = Vector2(-63, 107)
+position = Vector2(-205, 96)

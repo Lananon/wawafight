@@ -28,6 +28,9 @@ var state_reset_timer: int = 0
 var current_move: String
 var cancel_options: Array = []
 var is_hitbox_active: bool = false
+var freeze_buffer: int
+var freeze_timer: int
+var combo: int
 ##input variables
 const buffer_window: int = 8
 var button_buffer: String
@@ -74,6 +77,8 @@ func get_hitbox():
 
 func on_hit(attack) -> void:
 	if get_opponent().is_hitbox_active:
+		get_opponent().freeze_buffer = attack.self_hitstop
+		freeze_buffer = attack.hitstop
 		if attack.block_type.has(get_block_type()):
 			if get_block_type() == "LOW":
 				set_state("crouch_blockstun", attack.blockstun)
@@ -82,8 +87,11 @@ func on_hit(attack) -> void:
 			if get_block_type() == "AIR":
 				set_state("stand_blockstun", attack.blockstun)
 		else:
-			print("woof!")
+			combo += 1
 			set_state("hitstun", attack.hitstun)
+			velocity.x = attack.knockback.x * get_opponent().side
+			velocity.y = attack.knockback.y
+			print(combo)
 		get_opponent().is_hitbox_active = false
 
 func buffer(button: String, direction: Vector2i) -> void:
@@ -123,10 +131,7 @@ func execute_inputs():
 			set_state("attack", duration_dictionary[move_dictionary[closest_valid_input]])
 
 func process_inputs() -> void:
-	buffer_timer -= 1
-	if buffer_timer <= 0:
-		button_buffer = ""
-		direction_buffer = Vector2i(0, 0)
+	
 	
 	if Input.is_action_just_pressed(get_parent().a):
 		buffer("A", get_input_vector())
@@ -172,6 +177,13 @@ func movement() -> void:
 		velocity.x = jump_speed * jump_direction
 
 func end_of_frame() -> void:
+	
+	
+	buffer_timer -= 1
+	if buffer_timer <= 0:
+		button_buffer = ""
+		direction_buffer = Vector2i(0, 0)
+	
 	global_position = Vector2i(upscaled_position / upscaling_factor)
 	
 	if is_on_ground() and state == "neutral":
@@ -188,3 +200,14 @@ func end_of_frame() -> void:
 		state = "neutral"
 		
 	#print()
+	if state == "neutral":
+		combo = 0
+
+func freeze_update():
+	freeze_timer -= 1
+	
+	if freeze_buffer != 0:
+		freeze_timer = freeze_buffer
+	
+	
+	freeze_buffer = 0
