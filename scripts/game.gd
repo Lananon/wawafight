@@ -31,25 +31,33 @@ func _process(delta: float) -> void:
 		frame_tick()
 
 func frame_tick() -> void:
+
 	player1_character.execute_inputs()
 	player2_character.execute_inputs()
-	player1_character.check_for_hit()
-	player2_character.check_for_hit()
+
 	player1_character.movement()
 	player2_character.movement()
-	player1_character.calculate_physics()
-	player2_character.calculate_physics()
+	if player1_character.freeze_timer <= 0:
+		player1_character.calculate_physics()
+	if player2_character.freeze_timer <= 0:
+		player2_character.calculate_physics()
 	if player1_character.freeze_timer <= 0:
 		player1_character.end_of_frame()
 	if player2_character.freeze_timer <= 0:
 		player2_character.end_of_frame()
 	if player1_character.freeze_timer <= 0:
-		player1_character.set_anims()
+		player1_character.anim_update()
 	if player2_character.freeze_timer <= 0:
-		player2_character.set_anims()
+		player2_character.anim_update()
+	player1_character.check_for_hit()
+	player2_character.check_for_hit()
 	if player1_character.freeze_timer <= 0:
-		player1_character.animation_player.animate()
+		player1_character.anim_update(true)
 	if player2_character.freeze_timer <= 0:
-		player2_character.animation_player.animate()
+		player2_character.anim_update(true)
+	if player1_character.freeze_timer <= 0:
+		player1_character.animation_player.current_frame += 1
+	if player2_character.freeze_timer <= 0:
+		player2_character.animation_player.current_frame += 1
 	player1_character.freeze_update()
 	player2_character.freeze_update()

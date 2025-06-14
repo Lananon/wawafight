@@ -34,3 +34,10 @@ func set_anims():
 		animation_player.play("crouch_blockstun")
 	if state == "stand_blockstun":
 		animation_player.play("stand_blockstun")
+
+func anim_update(visuals_only: bool = false):
+	set_anims()
+	if visuals_only == false:
+		animation_player.animate()
+	if visuals_only == true:
+		animation_player.animate(true)

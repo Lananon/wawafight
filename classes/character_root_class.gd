@@ -91,7 +91,7 @@ func on_hit(attack) -> void:
 			set_state("hitstun", attack.hitstun)
 			velocity.x = attack.knockback.x * get_opponent().side
 			velocity.y = attack.knockback.y
-			print(combo)
+			print(combo, get_opponent().state_reset_timer - state_reset_timer)
 		get_opponent().is_hitbox_active = false
 
 func buffer(button: String, direction: Vector2i) -> void:
@@ -115,6 +115,8 @@ func get_block_type():
 
 
 
+
+	
 
 func execute_inputs():
 	var closest_valid_input: Array

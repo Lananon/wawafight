@@ -4,7 +4,7 @@ class_name animation_step
 
 #add an animation_step called LOOP at the end of your animation if you want it to loop
 
-@export var frame: int
+@export var frame: int = 1
 @export var animation_frame: int
 
 @export var is_new_attack: bool
