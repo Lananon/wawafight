@@ -9,7 +9,7 @@ func _ready() -> void:
 	}
 	
 	duration_dictionary = {
-		"5A": 16
+		"5A": 15
 	}
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,8 +35,10 @@ func set_anims():
 	if state == "stand_blockstun":
 		animation_player.play("stand_blockstun")
 
-func anim_update(visuals_only: bool = false):
+func anim_update(visuals_only: bool = false, check_inputs: bool = false):
 	set_anims()
+	if check_inputs:
+		execute_inputs()
 	if visuals_only == false:
 		animation_player.animate()
 	if visuals_only == true:

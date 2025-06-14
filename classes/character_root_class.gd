@@ -79,13 +79,21 @@ func on_hit(attack) -> void:
 	if get_opponent().is_hitbox_active:
 		get_opponent().freeze_buffer = attack.self_hitstop
 		freeze_buffer = attack.hitstop
-		if attack.block_type.has(get_block_type()):
-			if get_block_type() == "LOW":
-				set_state("crouch_blockstun", attack.blockstun)
-			if get_block_type() == "HIGH":
-				set_state("stand_blockstun", attack.blockstun)
-			if get_block_type() == "AIR":
-				set_state("stand_blockstun", attack.blockstun)
+		if state == "neutral":
+			if attack.block_type.has(get_block_type()):
+				velocity.x = attack.pushback * get_opponent().side
+				if get_block_type() == "LOW":
+					set_state("crouch_blockstun", attack.blockstun)
+				if get_block_type() == "HIGH":
+					set_state("stand_blockstun", attack.blockstun)
+				if get_block_type() == "AIR":
+					set_state("stand_blockstun", attack.blockstun)
+			else:
+				combo += 1
+				set_state("hitstun", attack.hitstun)
+				velocity.x = attack.knockback.x * get_opponent().side
+				velocity.y = attack.knockback.y
+				print(combo, get_opponent().state_reset_timer - state_reset_timer)
 		else:
 			combo += 1
 			set_state("hitstun", attack.hitstun)
@@ -110,7 +118,6 @@ func get_block_type():
 			return "AIR"
 	else:
 		return "nothing"
-
 
 
 
@@ -198,11 +205,13 @@ func end_of_frame() -> void:
 	
 	state_reset_timer -= 1
 	
-	if state_reset_timer <= 0:
+	if state_reset_timer == 0:
 		state = "neutral"
+		animation_player.current_frame = 1
 		
 	#print()
 	if state == "neutral":
+		
 		combo = 0
 
 func freeze_update():
