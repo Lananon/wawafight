@@ -2,9 +2,14 @@ extends Node
 
 @onready var player1 = get_node("player1")
 @onready var player2 = get_node("player2")
+@onready var camera = get_node("Camera2D")
 
 @onready var player1_character = get_node("player1").get_child(0)
 @onready var player2_character = get_node("player2").get_child(0)
+
+@export var stage_size = Vector2i(640, 180)
+
+@onready var screen_size = get_viewport().size.x
 
 var fbf_mode = false
 # Called when the node enters the scene tree for the first time.
@@ -31,6 +36,9 @@ func _process(delta: float) -> void:
 		frame_tick()
 
 func frame_tick() -> void:
+	camera.global_position.x = clamp((player1_character.global_position.x + player2_character.global_position.x) / 2, screen_size / 2, stage_size.x - screen_size / 2)
+	
+	
 	player1_character.movement()
 	player2_character.movement()
 	if player1_character.freeze_timer <= 0:

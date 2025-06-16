@@ -125,7 +125,6 @@ func get_block_type():
 
 
 
-	
 
 func execute_inputs():
 	var closest_valid_input: Array
