@@ -34,3 +34,7 @@ func play(animation: String):
 func play_from_start(animation: String):
 	current_animation = animation
 	current_frame = 1
+	
+
+func force_anim_reset():
+	current_frame = 1

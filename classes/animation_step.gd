@@ -16,3 +16,4 @@ class_name animation_step
 @export var pushback: int
 @export var hitstop: int
 @export var self_hitstop: int
+@export var cancel_options: Array = ["5A"]

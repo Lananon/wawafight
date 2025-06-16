@@ -77,6 +77,7 @@ func get_hitbox():
 
 func on_hit(attack) -> void:
 	if get_opponent().is_hitbox_active:
+		get_opponent().cancel_options = attack.cancel_options
 		get_opponent().freeze_buffer = attack.self_hitstop
 		freeze_buffer = attack.hitstop
 		if state == "neutral":
@@ -135,9 +136,11 @@ func execute_inputs():
 		else:
 			closest_valid_input = [Vector2i(0, 0), button_buffer]
 			
-		if state == "neutral" or cancel_options.has(closest_valid_input):
+		
+		if state == "neutral" or cancel_options.has(move_dictionary[closest_valid_input]):
 			current_move = move_dictionary[closest_valid_input]
 			set_state("attack", duration_dictionary[move_dictionary[closest_valid_input]])
+			animation_player.force_anim_reset()
 
 func process_inputs() -> void:
 	
@@ -209,10 +212,13 @@ func end_of_frame() -> void:
 		state = "neutral"
 		animation_player.current_frame = 1
 		
-	#print()
+	print(cancel_options)
 	if state == "neutral":
 		
 		combo = 0
+	
+	if not state == "attack":
+		cancel_options = []
 
 func freeze_update():
 	freeze_timer -= 1
