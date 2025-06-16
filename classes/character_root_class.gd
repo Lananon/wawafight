@@ -62,6 +62,7 @@ func is_on_ground() -> bool:
 func set_state(state_to_set: String, duration: int) -> void:
 	state = state_to_set
 	state_reset_timer = duration
+	cancel_options = []
 
 func get_opponent():
 	if get_parent().name == "player1":
@@ -138,6 +139,8 @@ func execute_inputs():
 			
 		
 		if state == "neutral" or cancel_options.has(move_dictionary[closest_valid_input]):
+			button_buffer = ""
+			direction_buffer = Vector2i(0, 0)
 			current_move = move_dictionary[closest_valid_input]
 			set_state("attack", duration_dictionary[move_dictionary[closest_valid_input]])
 			animation_player.force_anim_reset()
