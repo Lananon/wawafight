@@ -4,6 +4,7 @@ class_name character_root
 
 ##object references
 @onready var animation_player = get_node("animation_player")
+@onready var game = get_parent().get_parent()
 
 ##movement variables
 #all of these are in quarter pixels per frame
@@ -81,7 +82,7 @@ func on_hit(attack) -> void:
 		get_opponent().cancel_options = attack.cancel_options
 		get_opponent().freeze_buffer = attack.self_hitstop
 		freeze_buffer = attack.hitstop
-		if state == "neutral":
+		if ["neutral", "stand_blockstun", "crouch_blockstun"].has(state):
 			if attack.block_type.has(get_block_type()):
 				velocity.x = attack.pushback * get_opponent().side
 				if get_block_type() == "LOW":
@@ -191,7 +192,20 @@ func movement() -> void:
 		velocity.x = jump_speed * jump_direction
 
 func end_of_frame() -> void:
+		
+	if upscaled_position.x <= 16:
+		if side == 1:
+			upscaled_position.x = 16
+			
+		if side == -1:
+			upscaled_position.x = 17
 	
+	if upscaled_position.x >= game.stage_size.x * 4 -16:
+		if side == -1:
+			upscaled_position.x = game.stage_size.x * 4 -16
+		
+		if side == 1:
+			upscaled_position.x = game.stage_size.x * 4 -17
 	
 	buffer_timer -= 1
 	if buffer_timer <= 0:
@@ -207,6 +221,8 @@ func end_of_frame() -> void:
 			side = 1
 	
 	scale.x = side
+	
+	
 	
 	state_reset_timer -= 1
 	
