@@ -193,19 +193,19 @@ func movement() -> void:
 
 func end_of_frame() -> void:
 		
-	if upscaled_position.x <= 16:
-		if side == 1:
+
+	if side == 1:
+		if upscaled_position.x <= 16:
 			upscaled_position.x = 16
-			
-		if side == -1:
-			upscaled_position.x = 17
-	
-	if upscaled_position.x >= game.stage_size.x * 4 -16:
-		if side == -1:
-			upscaled_position.x = game.stage_size.x * 4 -16
+		if upscaled_position.x >= game.stage_size.x * 4 -24:
+			upscaled_position.x = game.stage_size.x * 4 -24
 		
-		if side == 1:
-			upscaled_position.x = game.stage_size.x * 4 -17
+	if side == -1:
+		if upscaled_position.x <= 24:
+			upscaled_position.x = 24
+		if upscaled_position.x >= game.stage_size.x * 4 -16:
+			upscaled_position.x = game.stage_size.x * 4 -16
+
 	
 	buffer_timer -= 1
 	if buffer_timer <= 0:
