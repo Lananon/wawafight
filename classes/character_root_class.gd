@@ -246,6 +246,9 @@ func end_of_frame() -> void:
 	
 	state_reset_timer -= 1
 	
+	if state_reset_timer == 0 and state == "hitstun" and not is_on_ground():
+		state_reset_timer = 1
+	
 	if state_reset_timer == 0:
 		state = "neutral"
 		animation_player.current_frame = 1
