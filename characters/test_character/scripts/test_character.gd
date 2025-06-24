@@ -34,6 +34,8 @@ func set_anims():
 		animation_player.play("crouch_blockstun")
 	if state == "stand_blockstun":
 		animation_player.play("stand_blockstun")
+	if state == "knockdown":
+		animation_player.play("knockdown")
 
 func anim_update(visuals_only: bool = false, check_inputs: bool = false):
 	set_anims()

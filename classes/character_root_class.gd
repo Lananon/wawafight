@@ -24,6 +24,8 @@ var velocity: Vector2i
 @export var gravity: int
 const floor_height: int = 560
 var decel: int = 1
+#only used for checking for landing, dont use for actual ground checks
+var has_landed: bool = false
 ##state machine variables
 var state: String = "neutral"
 var state_reset_timer: int = 0
@@ -234,7 +236,13 @@ func end_of_frame() -> void:
 	
 	scale.x = side
 	
-	
+	if has_landed == false and is_on_ground():
+		if state == "hitstun":
+			set_state("knockdown", 30)
+		else:
+			set_state("neutral", 0)
+		has_landed = true
+		
 	
 	state_reset_timer -= 1
 	
@@ -242,7 +250,10 @@ func end_of_frame() -> void:
 		state = "neutral"
 		animation_player.current_frame = 1
 		
-	print(is_cornered)
+	if not is_on_ground():
+		has_landed = false
+	
+	print(has_landed)
 	if state == "neutral":
 		
 		combo = 0
