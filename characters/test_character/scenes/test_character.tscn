@@ -87,10 +87,12 @@ animation_frame = 24
 is_new_attack = true
 hitstun = 16
 blockstun = 11
-knockback = Vector2i(7, -16)
+knockback = Vector2i(7, 0)
+air_knockback = Vector2i(7, 0)
 pushback = 7
 hitstop = 20
 self_hitstop = 20
+cancel_options = ["5A", "jump"]
 metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
 
 [node name="hitbox" type="Area2D" parent="animation_player/5A/2"]

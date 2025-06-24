@@ -97,17 +97,9 @@ func on_hit(attack) -> void:
 				if get_block_type() == "AIR":
 					set_state("stand_blockstun", attack.blockstun)
 			else:
-				combo += 1
-				set_state("hitstun", attack.hitstun)
-				apply_horizontal_knockback(attack.knockback.x)
-				velocity.y = attack.knockback.y
-				print(combo, get_opponent().state_reset_timer - state_reset_timer)
+				succesful_hit(attack)
 		else:
-			combo += 1
-			set_state("hitstun", attack.hitstun)
-			apply_horizontal_knockback(attack.knockback.x)
-			velocity.y = attack.knockback.y
-			print(combo, get_opponent().state_reset_timer - state_reset_timer)
+			succesful_hit(attack)
 		get_opponent().is_hitbox_active = false
 
 func buffer(button: String, direction: Vector2i) -> void:
@@ -130,10 +122,20 @@ func get_block_type():
 func apply_horizontal_knockback(kb):
 	if not is_cornered: 
 		velocity.x = kb * get_opponent().side
-	if is_cornered:
+	if is_cornered and get_opponent().is_on_ground():
 		get_opponent().velocity.x = -kb * get_opponent().side
 
-
+func succesful_hit(attack):
+	if is_on_ground():
+		combo += 1
+		set_state("hitstun", attack.hitstun)
+		apply_horizontal_knockback(attack.knockback.x)
+		velocity.y = attack.knockback.y
+	else:
+		combo += 1
+		set_state("hitstun", attack.hitstun)
+		apply_horizontal_knockback(attack.air_knockback.x)
+		velocity.y = attack.air_knockback.y
 
 
 func execute_inputs():
@@ -201,8 +203,6 @@ func movement() -> void:
 		velocity.x = jump_speed * jump_direction
 
 func end_of_frame() -> void:
-		
-
 	if side == 1:
 		if upscaled_position.x <= 16:
 			upscaled_position.x = 16
