@@ -13,6 +13,7 @@ class_name character_root
 @export var jump_height: int
 var jump_direction: int
 var side: int = 1
+var is_cornered: bool = false
 ##physics variables
 #use this to calculate position changes, do not use global_position itself
 #meant to be used when you need position changes smaller than 1 pixel
@@ -79,12 +80,14 @@ func get_hitbox():
 
 func on_hit(attack) -> void:
 	if get_opponent().is_hitbox_active:
+		z_index = 0
+		get_opponent().z_index = 1
 		get_opponent().cancel_options = attack.cancel_options
 		get_opponent().freeze_buffer = attack.self_hitstop
 		freeze_buffer = attack.hitstop
 		if ["neutral", "stand_blockstun", "crouch_blockstun"].has(state):
 			if attack.block_type.has(get_block_type()):
-				velocity.x = attack.pushback * get_opponent().side
+				apply_horizontal_knockback(attack.pushback)
 				if get_block_type() == "LOW":
 					set_state("crouch_blockstun", attack.blockstun)
 				if get_block_type() == "HIGH":
@@ -94,13 +97,13 @@ func on_hit(attack) -> void:
 			else:
 				combo += 1
 				set_state("hitstun", attack.hitstun)
-				velocity.x = attack.knockback.x * get_opponent().side
+				apply_horizontal_knockback(attack.knockback.x)
 				velocity.y = attack.knockback.y
 				print(combo, get_opponent().state_reset_timer - state_reset_timer)
 		else:
 			combo += 1
 			set_state("hitstun", attack.hitstun)
-			velocity.x = attack.knockback.x * get_opponent().side
+			apply_horizontal_knockback(attack.knockback.x)
 			velocity.y = attack.knockback.y
 			print(combo, get_opponent().state_reset_timer - state_reset_timer)
 		get_opponent().is_hitbox_active = false
@@ -122,7 +125,11 @@ func get_block_type():
 	else:
 		return "nothing"
 
-
+func apply_horizontal_knockback(kb):
+	if not is_cornered: 
+		velocity.x = kb * get_opponent().side
+	if is_cornered:
+		get_opponent().velocity.x = -kb * get_opponent().side
 
 
 
@@ -197,15 +204,20 @@ func end_of_frame() -> void:
 	if side == 1:
 		if upscaled_position.x <= 16:
 			upscaled_position.x = 16
+			is_cornered = true
 		if upscaled_position.x >= game.stage_size.x * 4 -24:
 			upscaled_position.x = game.stage_size.x * 4 -24
+		if not upscaled_position.x <= 16 and not upscaled_position.x >= game.stage_size.x * 4 -24:
+			is_cornered = false
 		
 	if side == -1:
 		if upscaled_position.x <= 24:
 			upscaled_position.x = 24
 		if upscaled_position.x >= game.stage_size.x * 4 -16:
 			upscaled_position.x = game.stage_size.x * 4 -16
-
+			is_cornered = true
+		if not upscaled_position.x <= 24 and not upscaled_position.x >= game.stage_size.x * 4 -16:
+			is_cornered = false
 	
 	buffer_timer -= 1
 	if buffer_timer <= 0:
@@ -230,7 +242,7 @@ func end_of_frame() -> void:
 		state = "neutral"
 		animation_player.current_frame = 1
 		
-	print(cancel_options)
+	print(is_cornered)
 	if state == "neutral":
 		
 		combo = 0
