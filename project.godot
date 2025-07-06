@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="wawafight"
+config/name="ufgp"
 run/main_scene="uid://bkoca0bu561s5"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://misc/sprite_exports/icon.svg"
