@@ -6,13 +6,15 @@ func _ready() -> void:
 	move_dictionary = {
 		[Vector2i(0, 0), "A"]: "5A",
 		[Vector2i(0, 1), "A"]: "2A",
-		[Vector2i(0, 0), "B"]: "5B"
+		[Vector2i(0, 0), "B"]: "5B",
+		[Vector2i(0, 1), "B"]: "2B"
 	}
 	
 	duration_dictionary = {
 		"5A": 15,
 		"2A": 14,
-		"5B": 23
+		"5B": 23,
+		"2B": 23
 	}
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
