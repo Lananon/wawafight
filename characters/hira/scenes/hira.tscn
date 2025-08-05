@@ -32,6 +32,8 @@ script = ExtResource("1_3m2a5")
 walk_speed = 5
 jump_speed = 6
 jump_height = 20
+max_jumps = 2
+max_air_options = 1
 gravity = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

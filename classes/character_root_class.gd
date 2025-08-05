@@ -11,9 +11,14 @@ class_name character_root
 @export var walk_speed: int
 @export var jump_speed: int
 @export var jump_height: int
+@export var max_jumps: int
+@export var max_air_options: int
 var jump_direction: int
 var side: int = 1
 var is_cornered: bool = false
+var jumps: int
+var air_options: int
+var jump_buffer: bool
 ##physics variables
 #use this to calculate position changes, do not use global_position itself
 #meant to be used when you need position changes smaller than 1 pixel
@@ -185,14 +190,32 @@ func calculate_physics() -> void:
 
 func movement() -> void:
 	if is_on_ground() and state == "neutral":
+		jumps = max_jumps
+		air_options = max_air_options
 		if get_input_vector().y != 1:
 			if get_input_vector().x != 0:
 				velocity.x = get_input_vector().x * walk_speed
 		
+	if Input.is_action_just_pressed(get_parent().up):
+		jump_buffer = true
+	if get_input_vector().y >= 0:
+		jump_buffer = false
 		#jumping
-		if get_input_vector().y == -1:
+	if state == "neutral" or cancel_options.has("jump"):
+		if get_input_vector().y == -1 and is_on_ground():
 			set_state("jump_startup", 4)
+			jumps -= 1
+			jump_buffer = false
 			
+		if jump_buffer and not is_on_ground() and jumps > 0 and air_options > 0:
+			set_state("jump_startup", 4)
+			jumps -= 1
+			air_options -= 1
+			jump_buffer = false
+			
+	
+	
+		
 	
 	if get_input_vector().x == 1:
 		jump_direction = 1
