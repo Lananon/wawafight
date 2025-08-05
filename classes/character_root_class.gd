@@ -27,7 +27,7 @@ const upscaling_factor: int = 4
 #velocity, in quarter pixels per frame
 var velocity: Vector2i
 @export var gravity: int
-const floor_height: int = 560
+const floor_height: int = 600
 var decel: int = 1
 #only used for checking for landing, dont use for actual ground checks
 var has_landed: bool = false
@@ -142,6 +142,12 @@ func succesful_hit(attack):
 		set_state("hitstun", attack.hitstun)
 		apply_horizontal_knockback(attack.air_knockback.x)
 		velocity.y = attack.air_knockback.y
+
+func force_side_update():
+	if upscaled_position.x >= get_opponent().upscaled_position.x:
+		side = -1
+	if upscaled_position.x < get_opponent().upscaled_position.x:
+		side = 1
 
 
 func execute_inputs():
@@ -263,6 +269,7 @@ func end_of_frame() -> void:
 	scale.x = side
 	
 	if has_landed == false and is_on_ground():
+		force_side_update()
 		if state == "hitstun":
 			set_state("knockdown", 30)
 		else:
