@@ -36,7 +36,6 @@ position = Vector2(-5, 0)
 texture = ExtResource("2_3m2a5")
 offset = Vector2(2, -32)
 hframes = 39
-frame = 33
 
 [node name="animation_player" type="Node2D" parent="."]
 script = ExtResource("3_48fr4")
@@ -44,7 +43,6 @@ script = ExtResource("3_48fr4")
 [node name="idle" type="Node2D" parent="animation_player"]
 
 [node name="1" type="Node2D" parent="animation_player/idle"]
-visible = false
 script = ExtResource("4_81mqv")
 metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
 
@@ -94,8 +92,8 @@ script = ExtResource("4_81mqv")
 frame = 5
 animation_frame = 25
 is_new_attack = true
-hitstun = 10
-blockstun = 11
+hitstun = 12
+blockstun = 12
 knockback = Vector2i(7, 0)
 air_knockback = Vector2i(7, 0)
 pushback = 7
@@ -136,7 +134,6 @@ shape = SubResource("RectangleShape2D_mrd36")
 visible = false
 
 [node name="1" type="Node2D" parent="animation_player/2A"]
-visible = false
 script = ExtResource("4_81mqv")
 animation_frame = 27
 metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
@@ -154,8 +151,8 @@ script = ExtResource("4_81mqv")
 frame = 5
 animation_frame = 28
 is_new_attack = true
-hitstun = 10
-blockstun = 11
+hitstun = 12
+blockstun = 12
 knockback = Vector2i(7, 0)
 air_knockback = Vector2i(7, 0)
 pushback = 7
@@ -211,11 +208,11 @@ shape = SubResource("RectangleShape2D_mrd36")
 [node name="2" type="Node2D" parent="animation_player/5B"]
 visible = false
 script = ExtResource("4_81mqv")
-frame = 10
+frame = 7
 animation_frame = 31
 is_new_attack = true
-hitstun = 4
-blockstun = 11
+hitstun = 20
+blockstun = 18
 knockback = Vector2i(8, 0)
 air_knockback = Vector2i(5, 15)
 pushback = 8
