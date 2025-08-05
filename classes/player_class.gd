@@ -5,6 +5,7 @@ extends Node2D
 @export var up: String
 @export var down: String
 @export var a: String
+@export var b: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

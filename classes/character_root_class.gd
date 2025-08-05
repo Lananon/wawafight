@@ -101,6 +101,7 @@ func on_hit(attack) -> void:
 		else:
 			succesful_hit(attack)
 		get_opponent().is_hitbox_active = false
+		print(state_reset_timer - get_opponent().state_reset_timer)
 
 func buffer(button: String, direction: Vector2i) -> void:
 	button_buffer = button
@@ -161,6 +162,8 @@ func process_inputs() -> void:
 	
 	if Input.is_action_just_pressed(get_parent().a):
 		buffer("A", get_input_vector())
+	if Input.is_action_just_pressed(get_parent().b):
+		buffer("B", get_input_vector())
 
 func check_for_hit() -> void:
 	if get_hurtbox().get_overlapping_areas().has(get_opponent().get_hitbox()):
@@ -243,8 +246,8 @@ func end_of_frame() -> void:
 			set_state("neutral", 0)
 		has_landed = true
 		
-	
-	state_reset_timer -= 1
+	if freeze_buffer <= 0:
+		state_reset_timer -= 1
 	
 	if state_reset_timer == 0 and state == "hitstun" and not is_on_ground():
 		state_reset_timer = 1
@@ -256,7 +259,7 @@ func end_of_frame() -> void:
 	if not is_on_ground():
 		has_landed = false
 	
-	print(has_landed)
+	#print(direction_buffer, button_buffer)
 	if state == "neutral":
 		
 		combo = 0
