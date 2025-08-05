@@ -49,8 +49,10 @@ func frame_tick() -> void:
 		player1_character.end_of_frame()
 	if player2_character.freeze_timer <= 0:
 		player2_character.end_of_frame()
-	player1_character.execute_inputs()
-	player2_character.execute_inputs()
+	if player2_character.freeze_timer <= 0:
+		player1_character.execute_inputs()
+	if player2_character.freeze_timer <= 0:
+		player2_character.execute_inputs()
 	if player1_character.freeze_timer <= 0:
 		player1_character.anim_update()
 	if player2_character.freeze_timer <= 0:
