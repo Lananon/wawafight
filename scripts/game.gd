@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 		frame_tick()
 
 func frame_tick() -> void:
-	camera.global_position.x = clamp((player1_character.global_position.x + player2_character.global_position.x) / 2, screen_size / 2, stage_size.x - screen_size / 2)
+	camera.global_position.x = int(clamp((player1_character.global_position.x + player2_character.global_position.x) / 2, screen_size / 2, stage_size.x - screen_size / 2))
 	
 	
 	player1_character.movement()
@@ -49,7 +49,11 @@ func frame_tick() -> void:
 		player1_character.end_of_frame()
 	if player2_character.freeze_timer <= 0:
 		player2_character.end_of_frame()
+	if player1_character.freeze_timer <= 0:
+		player1_character.character_specific_code()
 	if player2_character.freeze_timer <= 0:
+		player2_character.character_specific_code()
+	if player1_character.freeze_timer <= 0:
 		player1_character.execute_inputs()
 	if player2_character.freeze_timer <= 0:
 		player2_character.execute_inputs()

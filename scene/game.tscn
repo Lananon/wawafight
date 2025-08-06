@@ -15,6 +15,7 @@ up = "p1_up"
 down = "p1_down"
 a = "p1_a"
 b = "p1_b"
+dash = "p1_dash"
 
 [node name="hira" parent="player1" instance=ExtResource("3_p1ry8")]
 position = Vector2(40, 124)
@@ -28,6 +29,7 @@ up = "p2_up"
 down = "p2_down"
 a = "p2_a"
 b = "p2_b"
+dash = "p2_dash"
 
 [node name="hira" parent="player2" instance=ExtResource("3_p1ry8")]
 position = Vector2(-200.554, 94.8023)

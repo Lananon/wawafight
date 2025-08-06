@@ -272,7 +272,7 @@ func end_of_frame() -> void:
 		force_side_update()
 		if state == "hitstun":
 			set_state("knockdown", 30)
-		else:
+		if state == "attack":
 			set_state("neutral", 0)
 		has_landed = true
 		

@@ -40,8 +40,8 @@ gravity = 1
 position = Vector2(-5, 0)
 texture = ExtResource("2_3m2a5")
 offset = Vector2(2, -32)
-hframes = 39
-frame = 38
+hframes = 40
+frame = 7
 
 [node name="animation_player" type="Node2D" parent="."]
 script = ExtResource("3_48fr4")
@@ -58,6 +58,74 @@ metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
 [node name="hurtbox" type="Area2D" parent="animation_player/idle/1"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/idle/1/hurtbox"]
+position = Vector2(-2.5, -24)
+shape = SubResource("RectangleShape2D_mrd36")
+
+[node name="dash" type="Node2D" parent="animation_player"]
+visible = false
+
+[node name="1" type="Node2D" parent="animation_player/dash"]
+script = ExtResource("4_81mqv")
+animation_frame = 6
+metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
+
+[node name="hitbox" type="Area2D" parent="animation_player/dash/1"]
+
+[node name="hurtbox" type="Area2D" parent="animation_player/dash/1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/dash/1/hurtbox"]
+position = Vector2(-2.5, -24)
+shape = SubResource("RectangleShape2D_mrd36")
+
+[node name="2" type="Node2D" parent="animation_player/dash"]
+script = ExtResource("4_81mqv")
+frame = 10
+metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
+
+[node name="hitbox" type="Area2D" parent="animation_player/dash/2"]
+
+[node name="hurtbox" type="Area2D" parent="animation_player/dash/2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/dash/2/hurtbox"]
+position = Vector2(-2.5, -24)
+shape = SubResource("RectangleShape2D_mrd36")
+
+[node name="backdash" type="Node2D" parent="animation_player"]
+visible = false
+
+[node name="1" type="Node2D" parent="animation_player/backdash"]
+script = ExtResource("4_81mqv")
+animation_frame = 7
+metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
+
+[node name="hitbox" type="Area2D" parent="animation_player/backdash/1"]
+
+[node name="hurtbox" type="Area2D" parent="animation_player/backdash/1"]
+
+[node name="2" type="Node2D" parent="animation_player/backdash"]
+script = ExtResource("4_81mqv")
+frame = 5
+animation_frame = 7
+metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
+
+[node name="hitbox" type="Area2D" parent="animation_player/backdash/2"]
+
+[node name="hurtbox" type="Area2D" parent="animation_player/backdash/2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/backdash/2/hurtbox"]
+position = Vector2(-2.5, -24)
+shape = SubResource("RectangleShape2D_mrd36")
+
+[node name="3" type="Node2D" parent="animation_player/backdash"]
+script = ExtResource("4_81mqv")
+frame = 10
+metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
+
+[node name="hitbox" type="Area2D" parent="animation_player/backdash/3"]
+
+[node name="hurtbox" type="Area2D" parent="animation_player/backdash/3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/backdash/3/hurtbox"]
 position = Vector2(-2.5, -24)
 shape = SubResource("RectangleShape2D_mrd36")
 
