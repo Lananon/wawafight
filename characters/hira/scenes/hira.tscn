@@ -18,7 +18,7 @@ size = Vector2(16, 7)
 size = Vector2(9, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_14y4j"]
-size = Vector2(17, 8)
+size = Vector2(27, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eya2a"]
 size = Vector2(23, 8)
@@ -174,7 +174,7 @@ air_knockback = Vector2i(7, 0)
 pushback = 7
 hitstop = 20
 self_hitstop = 20
-cancel_options = ["5A", "jump", "2A", "5B"]
+cancel_options = ["5A", "jump", "2A", "5B", "2B"]
 metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
 
 [node name="hitbox" type="Area2D" parent="animation_player/5A/2"]
@@ -234,7 +234,7 @@ air_knockback = Vector2i(7, 0)
 pushback = 7
 hitstop = 20
 self_hitstop = 20
-cancel_options = ["5A", "jump", "2A", "5B"]
+cancel_options = ["5A", "jump", "2A", "5B", "2B", "J5B"]
 metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
 
 [node name="hitbox" type="Area2D" parent="animation_player/2A/2"]
@@ -305,7 +305,7 @@ is_new_attack = true
 hitstun = 18
 blockstun = 16
 block_type = ["LOW", "AIR"]
-knockback = Vector2i(8, 0)
+knockback = Vector2i(8, -4)
 air_knockback = Vector2i(8, 1)
 pushback = 8
 hitstop = 14
@@ -316,7 +316,7 @@ metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
 [node name="hitbox" type="Area2D" parent="animation_player/2B/3"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/2B/3/hitbox"]
-position = Vector2(7.5, -4)
+position = Vector2(2.5, -4)
 shape = SubResource("RectangleShape2D_14y4j")
 debug_color = Color(0.938517, 0.186822, 0.419692, 0.42)
 
@@ -371,6 +371,115 @@ metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
 [node name="hurtbox" type="Area2D" parent="animation_player/2B/5"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/2B/5/hurtbox"]
+position = Vector2(-6, -16)
+shape = SubResource("RectangleShape2D_dmrmj")
+
+[node name="J5B" type="Node2D" parent="animation_player"]
+
+[node name="1" type="Node2D" parent="animation_player/J5B"]
+visible = false
+script = ExtResource("4_81mqv")
+animation_frame = 34
+metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
+
+[node name="hitbox" type="Area2D" parent="animation_player/J5B/1"]
+
+[node name="hurtbox" type="Area2D" parent="animation_player/J5B/1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/J5B/1/hurtbox"]
+position = Vector2(-2, -16)
+shape = SubResource("RectangleShape2D_dmrmj")
+
+[node name="2" type="Node2D" parent="animation_player/J5B"]
+visible = false
+script = ExtResource("4_81mqv")
+frame = 5
+animation_frame = 35
+metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
+
+[node name="hitbox" type="Area2D" parent="animation_player/J5B/2"]
+
+[node name="hurtbox" type="Area2D" parent="animation_player/J5B/2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/J5B/2/hurtbox"]
+position = Vector2(-2, -16)
+shape = SubResource("RectangleShape2D_dmrmj")
+
+[node name="3" type="Node2D" parent="animation_player/J5B"]
+visible = false
+script = ExtResource("4_81mqv")
+frame = 7
+animation_frame = 36
+is_new_attack = true
+hitstun = 23
+blockstun = 18
+block_type = ["AIR", "HIGH"]
+knockback = Vector2i(8, 0)
+air_knockback = Vector2i(8, -5)
+pushback = 8
+hitstop = 14
+self_hitstop = 14
+cancel_options = ["jump"]
+metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
+
+[node name="hitbox" type="Area2D" parent="animation_player/J5B/3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/J5B/3/hitbox"]
+position = Vector2(2.5, -4)
+shape = SubResource("RectangleShape2D_14y4j")
+debug_color = Color(0.938517, 0.186822, 0.419692, 0.42)
+
+[node name="hurtbox" type="Area2D" parent="animation_player/J5B/3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/J5B/3/hurtbox"]
+position = Vector2(-6, -16)
+shape = SubResource("RectangleShape2D_dmrmj")
+
+[node name="4" type="Node2D" parent="animation_player/J5B"]
+visible = false
+script = ExtResource("4_81mqv")
+frame = 11
+animation_frame = 37
+hitstun = 18
+blockstun = 16
+block_type = ["LOW", "AIR"]
+knockback = Vector2i(8, 0)
+air_knockback = Vector2i(8, 1)
+pushback = 8
+hitstop = 14
+self_hitstop = 14
+cancel_options = ["jump"]
+metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
+
+[node name="hitbox" type="Area2D" parent="animation_player/J5B/4"]
+
+[node name="hurtbox" type="Area2D" parent="animation_player/J5B/4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/J5B/4/hurtbox"]
+position = Vector2(-6, -16)
+shape = SubResource("RectangleShape2D_dmrmj")
+
+[node name="5" type="Node2D" parent="animation_player/J5B"]
+visible = false
+script = ExtResource("4_81mqv")
+frame = 17
+animation_frame = 38
+hitstun = 18
+blockstun = 16
+block_type = ["LOW", "AIR"]
+knockback = Vector2i(8, 0)
+air_knockback = Vector2i(8, 1)
+pushback = 8
+hitstop = 14
+self_hitstop = 14
+cancel_options = ["jump"]
+metadata/_custom_type_script = "uid://dahf0r6sbb5xh"
+
+[node name="hitbox" type="Area2D" parent="animation_player/J5B/5"]
+
+[node name="hurtbox" type="Area2D" parent="animation_player/J5B/5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="animation_player/J5B/5/hurtbox"]
 position = Vector2(-6, -16)
 shape = SubResource("RectangleShape2D_dmrmj")
 

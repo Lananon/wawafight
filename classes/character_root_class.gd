@@ -236,21 +236,21 @@ func movement() -> void:
 
 func end_of_frame() -> void:
 	if side == 1:
-		if upscaled_position.x <= 16:
-			upscaled_position.x = 16
+		if upscaled_position.x <= 32:
+			upscaled_position.x = 32
 			is_cornered = true
-		if upscaled_position.x >= game.stage_size.x * 4 -24:
-			upscaled_position.x = game.stage_size.x * 4 -24
-		if not upscaled_position.x <= 16 and not upscaled_position.x >= game.stage_size.x * 4 -24:
+		if upscaled_position.x >= game.stage_size.x * 4 -48:
+			upscaled_position.x = game.stage_size.x * 4 -48
+		if not upscaled_position.x <= 32 and not upscaled_position.x >= game.stage_size.x * 4 -48:
 			is_cornered = false
 		
 	if side == -1:
-		if upscaled_position.x <= 24:
-			upscaled_position.x = 24
-		if upscaled_position.x >= game.stage_size.x * 4 -16:
-			upscaled_position.x = game.stage_size.x * 4 -16
+		if upscaled_position.x <= 48:
+			upscaled_position.x = 48
+		if upscaled_position.x >= game.stage_size.x * 4 -32:
+			upscaled_position.x = game.stage_size.x * 4 -32
 			is_cornered = true
-		if not upscaled_position.x <= 24 and not upscaled_position.x >= game.stage_size.x * 4 -16:
+		if not upscaled_position.x <= 48 and not upscaled_position.x >= game.stage_size.x * 4 -32:
 			is_cornered = false
 	
 	buffer_timer -= 1
@@ -260,13 +260,7 @@ func end_of_frame() -> void:
 	
 	global_position = Vector2i(upscaled_position / upscaling_factor)
 	
-	if is_on_ground() and state == "neutral":
-		if upscaled_position.x >= get_opponent().upscaled_position.x:
-			side = -1
-		if upscaled_position.x < get_opponent().upscaled_position.x:
-			side = 1
 	
-	scale.x = side
 	
 	if has_landed == false and is_on_ground():
 		force_side_update()
@@ -286,6 +280,14 @@ func end_of_frame() -> void:
 		state = "neutral"
 		animation_player.current_frame = 1
 		
+	if is_on_ground() and state == "neutral":
+		if upscaled_position.x >= get_opponent().upscaled_position.x:
+			side = -1
+		if upscaled_position.x < get_opponent().upscaled_position.x:
+			side = 1
+	
+	scale.x = side
+	
 	if not is_on_ground():
 		has_landed = false
 	

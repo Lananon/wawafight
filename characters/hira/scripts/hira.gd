@@ -15,20 +15,29 @@ var back_dash_input_steps: int = 0
 var back_dash_input_reset: int = 0
 
 
+
+var ground_moves = {
+	[Vector2i(0, 0), "A"]: "5A",
+	[Vector2i(0, 1), "A"]: "2A",
+	[Vector2i(0, 0), "B"]: "5B",
+	[Vector2i(0, 1), "B"]: "2B"
+}
+
+var air_moves = {
+	[Vector2i(0, 0), "A"]: "2A",
+	[Vector2i(0, 0), "B"]: "J5B"
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	move_dictionary = {
-		[Vector2i(0, 0), "A"]: "5A",
-		[Vector2i(0, 1), "A"]: "2A",
-		[Vector2i(0, 0), "B"]: "5B",
-		[Vector2i(0, 1), "B"]: "2B"
-	}
+	move_dictionary = ground_moves
 	
 	duration_dictionary = {
 		"5A": 15,
 		"2A": 14,
 		"5B": 23,
-		"2B": 23
+		"2B": 23,
+		"J5B": 23
 	}
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -37,6 +46,12 @@ func _process(delta: float) -> void:
 
 
 func character_specific_code() -> void:
+	if is_on_ground():
+		move_dictionary = ground_moves
+	else:
+		move_dictionary = air_moves
+	
+	
 	#double tap dash
 	if dash_input_steps == 0:
 		if get_input_vector().x == side:

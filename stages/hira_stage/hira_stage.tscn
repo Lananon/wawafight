@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://byvt25kptreqt"]
+
+[ext_resource type="Texture2D" uid="uid://bjxjgcyb06qu6" path="res://stages/hira_stage/stage_background.png" id="1_717a4"]
+
+[node name="HiraStage" type="Node2D"]
+texture_filter = 1
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(320, 90)
+texture = ExtResource("1_717a4")
