@@ -150,6 +150,8 @@ func force_side_update():
 		side = 1
 
 
+
+
 func execute_inputs():
 	var closest_valid_input: Array
 	if button_buffer != "":
