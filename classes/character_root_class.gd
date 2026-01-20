@@ -237,6 +237,8 @@ func movement() -> void:
 		velocity.x = jump_speed * jump_direction
 
 func end_of_frame() -> void:
+
+	# wall management
 	if side == 1:
 		if upscaled_position.x <= 32:
 			upscaled_position.x = 32
@@ -255,6 +257,7 @@ func end_of_frame() -> void:
 		if not upscaled_position.x <= 48 and not upscaled_position.x >= game.stage_size.x * 4 -32:
 			is_cornered = false
 	
+	# tick buffer timer, reset buffer if needed
 	buffer_timer -= 1
 	if buffer_timer <= 0:
 		button_buffer = ""
@@ -263,7 +266,7 @@ func end_of_frame() -> void:
 	global_position = Vector2i(upscaled_position / upscaling_factor)
 	
 	
-	
+	# check for landing, update state accordingly
 	if has_landed == false and is_on_ground():
 		force_side_update()
 		if state == "hitstun":
@@ -271,7 +274,8 @@ func end_of_frame() -> void:
 		if state == "attack":
 			set_state("neutral", 0)
 		has_landed = true
-		
+	
+	#tick down more timers, reset more shit
 	if freeze_buffer <= 0:
 		state_reset_timer -= 1
 	
@@ -281,7 +285,8 @@ func end_of_frame() -> void:
 	if state_reset_timer == 0:
 		state = "neutral"
 		animation_player.current_frame = 1
-		
+	
+	# update player side
 	if is_on_ground() and state == "neutral":
 		if upscaled_position.x >= get_opponent().upscaled_position.x:
 			side = -1
@@ -290,6 +295,7 @@ func end_of_frame() -> void:
 	
 	scale.x = side
 	
+	# idk why this shit is down here tbhi
 	if not is_on_ground():
 		has_landed = false
 	
