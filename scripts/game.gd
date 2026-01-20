@@ -17,7 +17,6 @@ func _ready() -> void:
 	player1_character.upscaled_position = player1_character.global_position * player1_character.upscaling_factor
 	player2_character.upscaled_position = player2_character.global_position * player2_character.upscaling_factor
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if not fbf_mode:
@@ -34,6 +33,13 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("frame_step"):
 		frame_tick()
+
+
+func check_hitbox_interactions() -> void:
+	pass
+
+func apply_hitbox_interactions() -> void:
+	pass
 
 func frame_tick() -> void:
 	camera.global_position.x = int(clamp((player1_character.global_position.x + player2_character.global_position.x) / 2, screen_size / 2, stage_size.x - screen_size / 2))
@@ -79,6 +85,6 @@ func frame_tick() -> void:
 		player1_character.animation_player.current_frame += 1
 	if player2_character.freeze_timer <= 0:
 		player2_character.animation_player.current_frame += 1
-		
+
 	player1_character.freeze_update()
 	player2_character.freeze_update()
