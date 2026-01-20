@@ -109,11 +109,15 @@ func on_hit(attack) -> void:
 		print(state_reset_timer - get_opponent().state_reset_timer)
 
 func buffer(button: String, direction: Vector2i) -> void:
+	# most self explanatory function we have
+	# it just buffers shit yeah ofc it does
+	# tf did you think???
 	button_buffer = button
 	direction_buffer = direction
 	buffer_timer = buffer_window
 
 func get_block_type():
+	# function responsible for checking blocking
 	if get_input_vector().x * side == -1:
 		if is_on_ground():
 			if get_input_vector().y == 1:
@@ -179,24 +183,30 @@ func process_inputs() -> void:
 		buffer("B", get_input_vector())
 
 func check_for_hit() -> void:
+	# theres a 90% chance something here doesnt work
+	# that or its the most functioning part of the entire code base
 	if get_hurtbox().get_overlapping_areas().has(get_opponent().get_hitbox()):
 		on_hit(get_opponent().animation_player.current_step)
 
 func calculate_physics() -> void:
 	velocity.y += gravity
 	
+	# decel handling
 	if is_on_ground():
 		if velocity.x > 0:
 			velocity.x = max(0, velocity.x - decel)
 		if velocity.x < 0:
 			velocity.x = min(0, velocity.x + decel)
-			
+	
+	# update position based on velocity
 	upscaled_position += velocity
 	
+	# set player onto floor if below it
 	if upscaled_position.y >= floor_height:
 		upscaled_position.y = floor_height
 
 func movement() -> void:
+	# walking
 	if is_on_ground() and state == "neutral":
 		jumps = max_jumps
 		air_options = max_air_options
@@ -208,7 +218,7 @@ func movement() -> void:
 		jump_buffer = true
 	if get_input_vector().y >= 0:
 		jump_buffer = false
-		#jumping
+	#jumping
 	if state == "neutral" or cancel_options.has("jump"):
 		if get_input_vector().y == -1 and is_on_ground():
 			set_state("jump_startup", 4)
@@ -220,11 +230,10 @@ func movement() -> void:
 			jumps -= 1
 			air_options -= 1
 			jump_buffer = false
-			
-	
-	
-		
-	
+
+	# set jump direction
+	# we use this instead of just plain directional inputs because it feels more accurate 
+	# even tho its really not
 	if get_input_vector().x == 1:
 		jump_direction = 1
 	if get_input_vector().x == -1:
@@ -232,6 +241,7 @@ func movement() -> void:
 	if get_input_vector() == Vector2i(0, -1):
 		jump_direction = 0
 	
+	# execute jump if jump startup ends
 	if state == "jump_startup" and state_reset_timer == 1:
 		velocity.y = -jump_height
 		velocity.x = jump_speed * jump_direction
@@ -295,19 +305,21 @@ func end_of_frame() -> void:
 	
 	scale.x = side
 	
-	# idk why this shit is down here tbhi
+	# idk why this shit is down here tbh
 	if not is_on_ground():
 		has_landed = false
 	
 	#print(direction_buffer, button_buffer)
 	if state == "neutral":
-		
 		combo = 0
 	
+	# reset cancel options if needed
 	if not state == "attack":
 		cancel_options = []
 
 func freeze_update():
+	# function for freeze handling
+	# ngl i think this is currently broken
 	freeze_timer -= 1
 	
 	if freeze_buffer != 0:
